@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -12,19 +13,25 @@ public class Main {
 	
 	public static void main(String[] args)  {
 		
-		Scanner sc = new Scanner(System.in);
+		Console console = System.console();
+		if(console == null)
+		{
+			System.err.println("No console!");
+			System.exit(1);
+		}
+		
 		Main main = new Main();
 		
 		System.out.print("\n OJ User Stats\n --------------\n Type \"help\" to see instructions\n");
 		while(true)
 		{
-			System.out.print("\n> ");
-			String command = sc.nextLine().trim();
+			String command = console.readLine("%n> ").trim();
 			if(command.equals("quit"))
-				break;
+				System.exit(0);
 
 			if(command.equals("help"))
 				main.help();
+			
 			else if(command.equals("seed"))
 			{
 				if(main.seed())
@@ -36,8 +43,7 @@ public class Main {
 				command = st.nextToken();
 				if(command.equals("query"))
 				{
-					System.out.print("Enter the absolute path of the file containing the problems list: ");
-					String path = sc.nextLine();
+					String path = console.readLine("Enter the absolute path of the file containing the problems list: ");
 					String judge = st.nextToken().toUpperCase();
 					if(judge.equals("CF"))
 						main.query(0, path);
@@ -48,8 +54,7 @@ public class Main {
 				}
 				else if(command.equals("create"))
 				{
-					System.out.print("Enter the absolute path of the file containing the users list: ");
-					String path = sc.nextLine();
+					String path = console.readLine("Enter the absolute path of the file containing the users list: ");
 					String listName = st.nextToken();
 					if(main.create(listName, path))
 						System.out.println("List created sucessfully and loaded.");
@@ -71,8 +76,6 @@ public class Main {
 				}
 			}
 		}
-		sc.close();
-		
 	}
 	
 	private void help()

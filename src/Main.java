@@ -23,6 +23,7 @@ public class Main {
 		Main main = new Main();
 		
 		System.out.print("\n OJ User Stats\n --------------\n Type \"help\" to see instructions\n");
+		System.out.println("All input files must be placed inside the folder \"input\"");
 		while(true)
 		{
 			String command = console.readLine("%n> ").trim();
@@ -43,7 +44,7 @@ public class Main {
 				command = st.nextToken();
 				if(command.equals("query"))
 				{
-					String path = console.readLine("Enter the absolute path of the file containing the problems list: ");
+					String path = "input/" + console.readLine("Enter the file name containing the problems list: ");
 					String judge = st.nextToken().toUpperCase();
 					if(judge.equals("CF"))
 						main.query(0, path);
@@ -54,7 +55,7 @@ public class Main {
 				}
 				else if(command.equals("create"))
 				{
-					String path = console.readLine("Enter the absolute path of the file containing the users list: ");
+					String path = "input/" + console.readLine("Enter the file name containing the users list: ");
 					String listName = st.nextToken();
 					if(main.create(listName, path))
 						System.out.println("List created sucessfully and loaded.");
@@ -67,7 +68,13 @@ public class Main {
 				else if(command.equals("delete"))
 				{
 					//TODO
-					// call delete
+					String path = console.readLine("Enter the list name to be deleted: ");
+					
+				}
+				else if(command.equals("lists"))
+				{
+					//TODO
+					// call lists
 				}
 				else if(command.equals("view"))
 				{
@@ -84,7 +91,9 @@ public class Main {
 		System.out.println(" create <list_name>                 Create a new list");
 		System.out.println(" load <list_name>                   Load an existing list");
 		System.out.println(" delete <list_name>                 Delete an existing list");
-		System.out.println(" view <list_name>                   View user names of a certain list");
+		//TODO
+		System.out.println(" lists                              View exisiting list names of a certain list");
+		System.out.println(" view <list_name>                  View users names of a certain list");
 		System.out.println(" seed                               Update solved problems of loaded list users");
 		System.out.println(" query CF                           Filter Codeforces problems");
 		System.out.println(" query UVA                          Filter UVa problems");
@@ -137,11 +146,11 @@ public class Main {
 //		return false;
 //	}
 //	
-//	private boolean delete(String listName)
-//	{
-//		//TODO
-//		return true;
-//	}
+	private boolean delete(String listName)
+	{
+		//TODO
+		return true;
+	}
 	
 	private boolean seed()
 	{
